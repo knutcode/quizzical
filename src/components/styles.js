@@ -15,9 +15,11 @@ export const AnswerBtn = styled.button`
 	margin-right: 13px;
 	color: inherit;
 	background: none;
+	cursor: pointer;
 	:disabled {
 		color: #8f94af;
 		border: 2px solid #c0c3d0;
 		background-color: '';
+		cursor: default;
 	}
 `;
