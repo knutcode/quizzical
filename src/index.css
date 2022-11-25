@@ -6,4 +6,33 @@
 
 body {
 	margin: 0;
+	font-family: 'Inter', sans-serif;
+	color: #293264;
+	background-color: #f5f7fb;
+	border: 1px solid red;
+	padding: 50px;
+}
+
+h1,
+h2 {
+	font-family: 'Karla', sans-serif;
+	font-weight: 700;
+}
+
+button {
+	font-family: inherit;
+}
+
+@media (min-width: 780px) {
+	html {
+		height: 100%;
+	}
+
+	body {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 75px;
+	}
 }
