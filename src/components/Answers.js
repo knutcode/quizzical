@@ -43,6 +43,7 @@ export const Answers = (props) => {
 			return {
 				background: '#F8BCBC',
 				border: '2px solid #F8BCBC',
+				textDecoration: 'line-through',
 			};
 		} else if (item.isPicked && !props.gameOver) {
 			return {
