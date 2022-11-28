@@ -52,9 +52,8 @@ export const Answers = (props) => {
 			};
 		} else if (props.gameOver && item.answer === props.correctAnswer) {
 			return {
-				background: '#94D7A2',
-				border: '2px solid #94D7A2',
-				color: 'inherit',
+				background: '#b0e1ba',
+				border: '2px solid #b0e1ba',
 			};
 		} else if (!item.isPicked && !props.gameOver) {
 			return {

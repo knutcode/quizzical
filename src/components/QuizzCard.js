@@ -1,6 +1,13 @@
-// import { decode } from 'html-entities';
 import { Answers } from './Answers';
-import { QuestionContainer } from './styles';
+import {
+	AnswersContainer,
+	CardContainer,
+	EventButton,
+	QuestionContainer,
+	QuizzScreen,
+	Score,
+	ScoreContainer,
+} from './styles';
 import { useEffect, useState } from 'react';
 
 export const QuizzCard = (props) => {
@@ -26,14 +33,16 @@ export const QuizzCard = (props) => {
 		return (
 			<QuestionContainer key={item.id}>
 				<h2>{item.question}</h2>
-				<Answers
-					questionId={item.id}
-					answers={item.answers}
-					correctAnswer={item.correctAnswer}
-					isCorrect={item.isCorrect}
-					savePickedAnswers={savePickedAnswers}
-					gameOver={props.gameState.isOver}
-				/>
+				<AnswersContainer>
+					<Answers
+						questionId={item.id}
+						answers={item.answers}
+						correctAnswer={item.correctAnswer}
+						isCorrect={item.isCorrect}
+						savePickedAnswers={savePickedAnswers}
+						gameOver={props.gameState.isOver}
+					/>
+				</AnswersContainer>
 			</QuestionContainer>
 		);
 	});
@@ -67,26 +76,16 @@ export const QuizzCard = (props) => {
 	}
 
 	return (
-		<>
-			{quizzCardHtml}
+		<QuizzScreen>
+			<CardContainer>{quizzCardHtml}</CardContainer>
 			{!props.gameState.isOver ? (
-				<button onClick={() => checkAnswers()}>check answers</button>
+				<EventButton onClick={() => checkAnswers()}>check answers</EventButton>
 			) : (
-				<div>
-					<p>You got {props.points}/5 correct answers</p>
-					<button onClick={() => props.restart()}>Play again</button>
-				</div>
+				<ScoreContainer>
+					<Score>You got {props.points}/5 correct answers</Score>
+					<EventButton onClick={() => props.restart()}>Play again</EventButton>
+				</ScoreContainer>
 			)}
-		</>
+		</QuizzScreen>
 	);
 };
-
-// <button
-// 	onClick={() => {
-// 		props.setGameState((prevState) => {
-// 			return { ...prevState, isActive: false };
-// 		});
-// 	}}
-// >
-// 	Play again
-// </button>

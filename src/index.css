@@ -9,8 +9,31 @@ body {
 	font-family: 'Inter', sans-serif;
 	color: #293264;
 	background-color: #f5f7fb;
-	border: 1px solid red;
-	padding: 50px;
+}
+
+#root {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+
+.blue-svg {
+	z-index: -1;
+	position: fixed;
+	left: -30rem;
+	bottom: -30rem;
+	transform: rotate(280deg);
+}
+
+.yellow-svg {
+	z-index: -1;
+	position: fixed;
+	right: -30rem;
+	top: -30rem;
+	transform: rotate(-20deg);
 }
 
 h1,
@@ -21,18 +44,5 @@ h2 {
 
 button {
 	font-family: inherit;
-}
-
-@media (min-width: 780px) {
-	html {
-		height: 100%;
-	}
-
-	body {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 75px;
-	}
+	font-size: inherit;
 }
