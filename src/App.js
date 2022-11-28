@@ -1,17 +1,20 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { decode } from 'html-entities';
 import { QuizzCard } from './components/QuizzCard';
 import { nanoid } from 'nanoid';
+import { StartScreen } from './components/StartScreen';
+import { SVGYellow } from './components/SVGYellow';
+import { SVGBlue } from './components/SVGBlue';
 
 function App() {
+	const [quizzData, setQuizzData] = useState();
 	const [points, setPoints] = useState(0);
 	const [gameState, setGameState] = useState({
 		isActive: false,
 		isOver: false,
 	});
-
-	const [quizzData, setQuizzData] = useState();
+	const [category, setCategory] = useState({ value: '', topic: '' });
 
 	const fetchData = () => {
 		setPoints(0);
@@ -20,7 +23,7 @@ function App() {
 		});
 		setQuizzData();
 		axios
-			.get('https://opentdb.com/api.php?amount=5&type=multiple')
+			.get(`https://opentdb.com/api.php?amount=5&type=multiple&category=${category.value}`)
 			.then((res) => {
 				return res.data.results;
 			})
@@ -52,19 +55,23 @@ function App() {
 		});
 	};
 
+	const changeCategory = (event) => {
+		setCategory((prevCategory) => {
+			return {
+				...prevCategory,
+				value: event.target.value,
+			};
+		});
+	};
+
 	return (
 		<>
 			{!gameState.isActive && (
-				<div>
-					<h1>Quizzical</h1>
-					<button
-						onClick={() => {
-							fetchData();
-						}}
-					>
-						Start quiz
-					</button>
-				</div>
+				<StartScreen
+					fetchData={fetchData}
+					category={category}
+					changeCategory={changeCategory}
+				/>
 			)}
 			{quizzData && gameState.isActive && (
 				<QuizzCard
@@ -77,6 +84,8 @@ function App() {
 				/>
 			)}
 			{!quizzData && gameState.isActive && <h2>Loading ...</h2>}
+			<SVGYellow />
+			<SVGBlue />
 		</>
 	);
 }
