@@ -29,24 +29,6 @@ export const QuizzCard = (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.questions]);
 
-	const quizzCardHtml = questionState.map((item) => {
-		return (
-			<QuestionContainer key={item.id}>
-				<h2>{item.question}</h2>
-				<AnswersContainer>
-					<Answers
-						questionId={item.id}
-						answers={item.answers}
-						correctAnswer={item.correctAnswer}
-						isCorrect={item.isCorrect}
-						savePickedAnswers={savePickedAnswers}
-						gameOver={props.gameState.isOver}
-					/>
-				</AnswersContainer>
-			</QuestionContainer>
-		);
-	});
-
 	function savePickedAnswers(idQuestion, answer) {
 		setQuestionState((questions) => {
 			return questions.map((question) => {
@@ -74,6 +56,24 @@ export const QuizzCard = (props) => {
 			}
 		});
 	}
+
+	const quizzCardHtml = questionState.map((item) => {
+		return (
+			<QuestionContainer key={item.id}>
+				<h2>{item.question}</h2>
+				<AnswersContainer>
+					<Answers
+						questionId={item.id}
+						answers={item.answers}
+						correctAnswer={item.correctAnswer}
+						isCorrect={item.isCorrect}
+						savePickedAnswers={savePickedAnswers}
+						gameOver={props.gameState.isOver}
+					/>
+				</AnswersContainer>
+			</QuestionContainer>
+		);
+	});
 
 	return (
 		<QuizzScreen>
