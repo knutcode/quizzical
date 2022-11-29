@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
 import { AnswerBtn } from './styles';
+import useStylizeAnswers from '../hooks/useStylizeAnswers';
 
 export const Answers = (props) => {
+	const { stylize } = useStylizeAnswers(props.gameOver, props.isCorrect, props.correctAnswer);
+
 	const answers = props.answers.map((answer) => {
 		return {
 			id: nanoid(),
@@ -30,37 +33,6 @@ export const Answers = (props) => {
 		});
 
 		props.savePickedAnswers(idQuestion, answer);
-	}
-
-	function stylize(item) {
-		if (props.gameOver && item.isPicked && props.isCorrect) {
-			return {
-				background: '#94D7A2',
-				border: '2px solid #94D7A2',
-				color: 'inherit',
-			};
-		} else if (props.gameOver && item.isPicked && !props.isCorrect) {
-			return {
-				background: '#F8BCBC',
-				border: '2px solid #F8BCBC',
-				textDecoration: 'line-through',
-			};
-		} else if (item.isPicked && !props.gameOver) {
-			return {
-				background: '#D6DBF5',
-				border: '2px solid #848fc3',
-			};
-		} else if (props.gameOver && item.answer === props.correctAnswer) {
-			return {
-				background: '#b0e1ba',
-				border: '2px solid #b0e1ba',
-			};
-		} else if (!item.isPicked && !props.gameOver) {
-			return {
-				background: 'none',
-				border: '2px solid #4D5B9E',
-			};
-		}
 	}
 
 	const answersHtml = answerState.map((item) => {
